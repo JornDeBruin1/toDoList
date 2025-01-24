@@ -27,6 +27,7 @@ de werkende versie is via php artisan serve te zien. npm run dev is zodat de sty
 
 Ik gebruik momenteel tailwind als css framework hiervoor moet dus npm run dev actief zijn.
 
-php artisan serve runned op http://127.0.0.1:8000/ deze url gebruik ik voor de api zodat ik in de vue components de database kan aanpassen met javascript. 
+php artisan serve runned op 127.0.0.1:8000 deze url gebruik ik voor de api zodat ik in de vue components de database kan aanpassen met javascript. 
 
+Ik run dit project via laragon daarom heb runned het project op 127.0.0.1:8000 dit kan bij jouw anders zijn  
 </p>
