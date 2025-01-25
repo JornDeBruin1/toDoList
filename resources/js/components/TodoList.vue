@@ -51,10 +51,12 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 
+// variabelem definieren
 const newTask = ref("");
 const tasks = ref([]);
 const editingTask = ref("");
 
+//data van de api ophalen
 const fetchTasks = async () => {
     try {
         const response = await axios.get("/api/tasks");
@@ -64,6 +66,7 @@ const fetchTasks = async () => {
     }
 };
 
+// to do item toevoegen
 const addTask = async () => {
     if (newTask.value.trim() === "") return;
 
@@ -78,6 +81,7 @@ const addTask = async () => {
     }
 };
 
+// to do item wijzigen
 const updateTask = async () => {
     if (newTask.value.trim() === "") return;
 
@@ -95,10 +99,13 @@ const updateTask = async () => {
         console.error("Error updating task:", error);
     }
 };
+// wijzig knop geklikt en de taak in de input veld zetten
 const editTask = (task) => {
     newTask.value = task.ToDoItem;
     editingTask.value = task;
 };
+
+// taak voltooid maken
 const toggleTaskCompletion = async (task) => {
     try {
         const response = await axios.put(`/api/tasks/${task.id}`, {
@@ -111,5 +118,6 @@ const toggleTaskCompletion = async (task) => {
     }
 };
 
+// data ophalen bij het laden van de pagina
 onMounted(fetchTasks);
 </script>
