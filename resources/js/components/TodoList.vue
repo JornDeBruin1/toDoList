@@ -8,6 +8,7 @@
             type="text"
             class="w-1/2 bg-gray-100 p-2"
             placeholder="Voeg een nieuwe taak toe"
+            @keyup.enter="editingTask ? updateTask() : addTask()"
         />
         <button
             v-if="!editingTask"
@@ -54,7 +55,7 @@ import axios from "axios";
 // variabelem definieren
 const newTask = ref("");
 const tasks = ref([]);
-const editingTask = ref("");
+const editingTask = ref(null);
 
 //data van de api ophalen
 const fetchTasks = async () => {
