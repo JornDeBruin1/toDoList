@@ -10,7 +10,7 @@
 <body>
     <div id="app">
         <main >
-            @yield('content')
+            <todolist></todolist>
         </main>
     </div>
 </body>

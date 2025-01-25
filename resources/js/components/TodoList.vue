@@ -24,6 +24,7 @@
         <div class="w-1/2 p-4">
             <ul>
                 <li
+                    :class="{ hidden: task.voltooid }"
                     v-for="task in tasks"
                     :key="task.id"
                     class="flex justify-between p-3 m-2"
@@ -31,7 +32,7 @@
                     <input
                         type="checkbox"
                         :checked="task.voltooid"
-                        @change="removeTask(task.id)"
+                        @change="toggleTaskCompletion(task)"
                     />
                     <span class="p-4">{{ task.ToDoItem }}</span>
                     <button
@@ -98,14 +99,15 @@ const editTask = (task) => {
     newTask.value = task.ToDoItem;
     editingTask.value = task;
 };
-const removeTask = async (id) => {
+const toggleTaskCompletion = async (task) => {
     try {
-        await axios.delete(`/api/tasks/${id}`);
-        tasks.value = tasks.value.filter((task) => task.id !== id);
-        newTask.value = "";
-        editingTask.value = null;
+        const response = await axios.put(`/api/tasks/${task.id}`, {
+            voltooid: !task.voltooid,
+        });
+        const index = tasks.value.findIndex((t) => t.id === task.id);
+        tasks.value[index] = response.data;
     } catch (error) {
-        console.error("Error removing task:", error);
+        console.error("Error toggling task completion:", error);
     }
 };
 
